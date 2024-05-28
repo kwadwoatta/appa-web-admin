@@ -7,15 +7,11 @@ import { Injectable, inject } from '@angular/core';
 export class AuthService {
   http = inject(HttpClient);
 
-  login = (email: string, password: string) =>
-    this.http.post<Auth>(`/auth/login`, {
-      email,
-      password,
-    });
+  login = (dto: AuthDto) => this.http.post<Auth>(`/auth/login`, dto);
 }
 
 export interface AuthDto {
-  email: number;
+  email: string;
   password: string;
 }
 export interface Auth {

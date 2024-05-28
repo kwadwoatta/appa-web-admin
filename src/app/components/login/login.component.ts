@@ -40,23 +40,26 @@ export class LoginComponent {
 
   loginMutation = injectMutation(() => ({
     mutationFn: () =>
-      lastValueFrom(this.authService.login('admin@gmail.com', 'password')).then(
-        (response) => {
-          const expiresIn = new Date();
-          expiresIn.setHours(expiresIn.getHours() + 1); // Set cookie to expire in 1 hour
-          this.cookieService.set(
-            'access_token',
-            response.access_token,
-            expiresIn,
-            '/',
-            '',
-            true,
-            'Strict'
-          );
+      lastValueFrom(
+        this.authService.login({
+          email: 'admin@gmail.com',
+          password: 'password',
+        })
+      ).then((response) => {
+        const expiresIn = new Date();
+        expiresIn.setHours(expiresIn.getHours() + 1); // Set cookie to expire in 1 hour
+        this.cookieService.set(
+          'access_token',
+          response.access_token,
+          expiresIn,
+          '/',
+          '',
+          true,
+          'Strict'
+        );
 
-          this.router.navigate(['/dashboard']);
-        }
-      ),
+        this.router.navigate(['/dashboard']);
+      }),
   }));
 
   queryClient = injectQueryClient();
