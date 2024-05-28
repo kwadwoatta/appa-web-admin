@@ -8,7 +8,7 @@ export class AuthService {
   http = inject(HttpClient);
 
   login = (email: string, password: string) =>
-    this.http.post<Auth>(`http://localhost:3000/api/auth/login`, {
+    this.http.post<Auth>(`/auth/login`, {
       email,
       password,
     });
