@@ -1,0 +1,11 @@
+<p>login works!</p>
+<div>
+	@if (loginMutation.isPending()) {
+	<span>Adding todo...</span>
+	} @else if (loginMutation.isError()) {
+	<div>An error occurred: {{ loginMutation.error().message }}</div>
+	} @else if (loginMutation.isSuccess()) {
+	<div>Todo added!</div>
+	}
+	<button (click)="loginMutation.mutate()">Login admin</button>
+</div>
