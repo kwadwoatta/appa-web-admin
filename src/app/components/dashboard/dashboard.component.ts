@@ -10,6 +10,8 @@ import {
   injectQuery,
   injectQueryClient,
 } from '@tanstack/angular-query-experimental';
+import { ButtonModule } from 'primeng/button';
+import { OrderListModule } from 'primeng/orderlist';
 import { fromEvent, lastValueFrom, takeUntil } from 'rxjs';
 import { DeliveryService } from 'src/app/services/delivery.service';
 import { PackageService } from 'src/app/services/package.service';
@@ -18,7 +20,7 @@ import { PackageService } from 'src/app/services/package.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-dashboard',
   standalone: true,
-  imports: [],
+  imports: [ButtonModule, OrderListModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })

@@ -2,13 +2,20 @@
   <div>
     <div class="flex w-full justify-between font-bold">
       <h1>Package List</h1>
-      <a class="text-green-700" href="/dashboard/package">Create Package</a>
+      <a href="/dashboard/package">
+        <p-button
+          label="Create Package"
+          size="small"
+          outlined="true"
+          styleClass="text-pink-500"
+        />
+      </a>
     </div>
 
     @switch (packageQuery.status()) { @case ('pending') { Loading... } @case
     ('error') { Error: {{ packageQuery.error()?.message }}
     } @default {
-    <div class="text-green-900">
+    <div class="text-pink-500">
       @for (package of packageQuery.data(); track package._id) {
       <p>
         <a href="/dashboard/package/{{ package._id }}">{{
@@ -24,7 +31,9 @@
   <div>
     <div class="flex w-full justify-between font-bold">
       <h1>Delivery List</h1>
-      <a class="text-blue-700" href="/dashboard/package">Create Delivery</a>
+      <a class="text-blue-700" href="/dashboard/package">
+        <p-button label="Create Delivery" size="small" outlined="true" />
+      </a>
     </div>
 
     @switch (deliveryQuery.status()) { @case ('pending') { Loading... } @case

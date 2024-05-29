@@ -7,6 +7,7 @@ import {
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {
   QueryClient,
   provideAngularQuery,
@@ -46,5 +47,6 @@ export const appConfig: ApplicationConfig = {
       deps: [AuthService],
       multi: true,
     },
+    provideAnimationsAsync(),
   ],
 };
