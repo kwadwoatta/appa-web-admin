@@ -69,11 +69,11 @@
       <label class="block font-bold mb-2" [for]="depth.api.name">depth</label>
       <input
         pInputText
-        [id]="height.api.name"
-        [name]="height.api.name"
-        [value]="height.api.state.value"
-        (blur)="height.api.handleBlur()"
-        (input)="height.api.handleChange($any($event).target.value)"
+        [id]="depth.api.name"
+        [name]="depth.api.name"
+        [value]="depth.api.state.value"
+        (blur)="depth.api.handleBlur()"
+        (input)="depth.api.handleChange($any($event).target.value)"
       />
     </ng-container>
   </div>
@@ -89,11 +89,11 @@
       >
       <input
         pInputText
-        [id]="description.api.name"
-        [name]="description.api.name"
-        [value]="description.api.state.value"
-        (blur)="description.api.handleBlur()"
-        (input)="description.api.handleChange($any($event).target.value)"
+        [id]="from_address.api.name"
+        [name]="from_address.api.name"
+        [value]="from_address.api.state.value"
+        (blur)="from_address.api.handleBlur()"
+        (input)="from_address.api.handleChange($any($event).target.value)"
       />
     </ng-container>
   </div>
@@ -109,11 +109,11 @@
       >
       <input
         pInputText
-        [id]="description.api.name"
-        [name]="description.api.name"
-        [value]="description.api.state.value"
-        (blur)="description.api.handleBlur()"
-        (input)="description.api.handleChange($any($event).target.value)"
+        [id]="from_location.api.name"
+        [name]="from_location.api.name"
+        [value]="from_location.api.state.value"
+        (blur)="from_location.api.handleBlur()"
+        (input)="from_location.api.handleChange($any($event).target.value)"
       />
     </ng-container>
   </div>
@@ -125,11 +125,11 @@
       >
       <input
         pInputText
-        [id]="description.api.name"
-        [name]="description.api.name"
-        [value]="description.api.state.value"
-        (blur)="description.api.handleBlur()"
-        (input)="description.api.handleChange($any($event).target.value)"
+        [id]="to_address.api.name"
+        [name]="to_address.api.name"
+        [value]="to_address.api.state.value"
+        (blur)="to_address.api.handleBlur()"
+        (input)="to_address.api.handleChange($any($event).target.value)"
       />
     </ng-container>
   </div>
@@ -166,7 +166,7 @@
         optionLabel="email"
         optionValue="_id"
         placeholder="Select a sender"
-        (onSelect)="from_user.api.handleChange($any($event).target.value)"
+        (onChange)="from_user.api.handleChange($any($event).value)"
       />
     </ng-container>
   </div>
@@ -180,10 +180,11 @@
         *ngIf="getUsers() | async as users"
         [options]="users"
         [loading]="userQuery.isLoading()"
+        dataKey="_id"
         optionLabel="email"
         optionValue="_id"
         placeholder="Select a recipient"
-        (onSelect)="to_user.api.handleChange($any($event).target.value)"
+        (onChange)="to_user.api.handleChange($any($event).value)"
       />
     </ng-container>
   </div>

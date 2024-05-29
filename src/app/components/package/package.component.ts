@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TanStackField, injectForm, injectStore } from '@tanstack/angular-form';
+import { injectForm, injectStore, TanStackField } from '@tanstack/angular-form';
 import {
   injectMutation,
   injectQuery,
@@ -12,7 +12,7 @@ import { zodValidator } from '@tanstack/zod-form-adapter';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
-import { Observable, fromEvent, lastValueFrom, of, takeUntil } from 'rxjs';
+import { fromEvent, lastValueFrom, Observable, of, takeUntil } from 'rxjs';
 import {
   CreatePackageDto,
   PackageService,
@@ -120,7 +120,7 @@ export class PackageComponent {
       to_user: '',
     },
     onSubmit: ({ value }) => {
-      console.log({value});
+      console.log({ value });
 
       // this.packageMutation.mutate({
       //   description: value.description,
@@ -146,6 +146,12 @@ export class PackageComponent {
     // Add a validator to support Zod usage in Form and Field
     validatorAdapter: zodValidator,
   });
+
+  // onChange = (v: EventEmitter<DropdownChangeEvent>) => {
+  //   v.emit()
+  //   console.log('here');
+  //   console.log({ v });
+  // };
 
   z = z;
 
