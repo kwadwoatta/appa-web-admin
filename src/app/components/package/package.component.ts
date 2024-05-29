@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { injectForm, injectStore, TanStackField } from '@tanstack/angular-form';
 import {
@@ -61,57 +60,56 @@ export class PackageComponent {
     return of(this.userQuery.data() ?? []);
   }
 
-  uuidValidator(control: FormControl): { [key: string]: any } | null {
-    const value = control.value;
-    const uuidRegex =
-      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  // uuidValidator(control: FormControl): { [key: string]: any } | null {
+  //   const value = control.value;
+  //   const uuidRegex =
+  //     /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
-    if (!uuidRegex.test(value)) {
-      return { invalidUuid: true };
-    }
+  //   if (!uuidRegex.test(value)) {
+  //     return { invalidUuid: true };
+  //   }
 
-    return null;
-  }
+  //   return null;
+  // }
 
-  geoJsonPointValidator(control: FormControl): { [key: string]: any } | null {
-    const value = control.value;
-    const valueArray = value.split(',');
-    console.log({ value });
+  // geoJsonPointValidator(control: FormControl): { [key: string]: any } | null {
+  //   const value = control.value;
+  //   const valueArray = value.split(',');
+  //   console.log({ value });
 
-    if (!Array.isArray(valueArray) || valueArray.length !== 2) {
-      return { invalidGeoJsonPoint: true };
-    }
+  //   if (!Array.isArray(valueArray) || valueArray.length !== 2) {
+  //     return { invalidGeoJsonPoint: true };
+  //   }
 
-    const [longitude, latitude] = valueArray.map(parseFloat);
+  //   const [longitude, latitude] = valueArray.map(parseFloat);
 
-    if (typeof longitude !== 'number' || longitude < -180 || longitude > 180) {
-      return { invalidGeoJsonPoint: true };
-    }
+  //   if (typeof longitude !== 'number' || longitude < -180 || longitude > 180) {
+  //     return { invalidGeoJsonPoint: true };
+  //   }
 
-    if (typeof latitude !== 'number' || latitude < -90 || latitude > 90) {
-      return { invalidGeoJsonPoint: true };
-    }
+  //   if (typeof latitude !== 'number' || latitude < -90 || latitude > 90) {
+  //     return { invalidGeoJsonPoint: true };
+  //   }
 
-    return null;
-  }
+  //   return null;
+  // }
 
-  firstNameAsyncValidator = z.string().refine(
-    async value => {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      return !value.includes('error');
-    },
-    {
-      message: "No 'error' allowed in first name",
-    }
-  );
+  // firstNameAsyncValidator = z.string().refine(
+  //   async value => {
+  //     await new Promise(resolve => setTimeout(resolve, 1000));
+  //     return !value.includes('error');
+  //   },
+  //   {
+  //     message: "No 'error' allowed in first name",
+  //   }
+  // );
 
   form = injectForm({
     defaultValues: {
-      description: '',
-      weight: 0,
-      width: 0,
-      height: 0,
-      depth: 0,
+      weight: '',
+      width: '',
+      height: '',
+      depth: '',
       from_address: '',
       from_location: '',
       to_address: '',
@@ -120,38 +118,57 @@ export class PackageComponent {
       to_user: '',
     },
     onSubmit: ({ value }) => {
-      console.log({ value });
+      const sender = this.userQuery
+        .data()
+        ?.find(user => user._id === value.from_user);
+      const recipient = this.userQuery
+        .data()
+        ?.find(user => user._id === value.to_user);
 
-      // this.packageMutation.mutate({
-      //   description: value.description,
-      //   weight: value.weight,
-      //   width: value.width,
-      //   height: value.height,
-      //   depth: value.depth,
-      //   from_address: value.from_address,
-      //   from_location: {
-      //     type: 'Point',
-      //     coordinates: value.from_location.split(',').map(parseFloat),
-      //   },
-      //   to_address: value.to_address,
-      //   to_location: {
-      //     type: 'Point',
-      //     coordinates: value.to_location.split(',').map(parseFloat),
-      //   },
-      //   deliveries: [],
-      //   from_user: value.from_user,
-      //   to_user: value.to_user,
-      // });
+      const date = new Intl.DateTimeFormat('en-GB', {
+        dateStyle: 'medium',
+        timeStyle: 'short',
+        timeZone: 'Australia/Sydney',
+      }).format(new Date());
+
+      const description = `Package: ${sender?.firstName} ${sender?.lastName} -> ${recipient?.firstName} ${recipient?.lastName} (${date})`;
+
+      const dto: CreatePackageDto = {
+        description,
+        weight: Number(value.weight),
+        width: Number(value.width),
+        height: Number(value.height),
+        depth: Number(value.depth),
+        from_address: value.from_address,
+        from_location: {
+          type: 'Point',
+          coordinates: value.from_location.split(',').map(parseFloat),
+        },
+        to_address: value.to_address,
+        to_location: {
+          type: 'Point',
+          coordinates: value.to_location.split(',').map(parseFloat),
+        },
+        deliveries: [],
+        from_user: value.from_user,
+        to_user: value.to_user,
+      };
+
+      console.log({ dto });
+
+      this.packageMutation.mutate(dto, {
+        onSuccess: () => {
+          this.router.navigate(['/dashboard']);
+        },
+        onError: e => {
+          console.log({ e });
+          alert(JSON.stringify((e as any).error.message));
+        },
+      });
     },
     // Add a validator to support Zod usage in Form and Field
     validatorAdapter: zodValidator,
   });
-
-  // onChange = (v: EventEmitter<DropdownChangeEvent>) => {
-  //   v.emit()
-  //   console.log('here');
-  //   console.log({ v });
-  // };
 
   z = z;
 

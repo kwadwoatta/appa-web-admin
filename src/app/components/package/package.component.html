@@ -3,26 +3,6 @@
   class="card p-fluid p-10 flex flex-col justify-center items-center p-fluid [&>*]:w-full [&>label]:block [&>label]:font-bold [&>label]:mb-2 gap-2"
 >
   <div class="flex-auto">
-    <ng-container
-      [tanstackField]="form"
-      name="description"
-      #description="field"
-    >
-      <label class="block font-bold mb-2" [for]="description.api.name"
-        >description</label
-      >
-      <input
-        pInputText
-        [id]="description.api.name"
-        [name]="description.api.name"
-        [value]="description.api.state.value"
-        (blur)="description.api.handleBlur()"
-        (input)="description.api.handleChange($any($event).target.value)"
-      />
-    </ng-container>
-  </div>
-
-  <div class="flex-auto">
     <ng-container [tanstackField]="form" name="weight" #weight="field">
       <label class="block font-bold mb-2" [for]="weight.api.name">weight</label>
       <input
