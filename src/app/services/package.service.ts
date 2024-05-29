@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Package } from 'src/common';
 
 @Injectable({
@@ -18,4 +18,10 @@ export class PackageService {
     this.http.post<Package>(`http://localhost:3000/api/package`, dto);
 }
 
-export interface CreatePackageDto extends Package {}
+export type CreatePackageDto = Omit<
+  Package,
+  'from_user' | 'to_user' | '_id' | 'createdAt' | 'updatedAt'
+> & {
+  from_user: string;
+  to_user: string;
+};

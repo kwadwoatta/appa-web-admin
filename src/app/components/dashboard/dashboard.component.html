@@ -13,19 +13,17 @@
     </div>
 
     @switch (packageQuery.status()) {
-      @case ("pending") {
+      @case ('pending') {
         Loading...
       }
-      @case ("error") {
+      @case ('error') {
         Error: {{ packageQuery.error()?.message }}
       }
       @default {
         <div class="text-pink-500">
           @for (package of packageQuery.data(); track package._id) {
             <p>
-              <a href="/dashboard/package/{{ package._id }}">{{
-                package.description
-              }}</a>
+              {{ package.description }}
             </p>
           }
         </div>
@@ -47,19 +45,17 @@
     </div>
 
     @switch (deliveryQuery.status()) {
-      @case ("pending") {
+      @case ('pending') {
         Loading...
       }
-      @case ("error") {
+      @case ('error') {
         Error: {{ deliveryQuery.error()?.message }}
       }
       @default {
         <div class="text-blue-900">
           @for (delivery of deliveryQuery.data(); track delivery._id) {
             <p>
-              <a href="/dashboard/delivery/{{ delivery._id }}">{{
-                delivery._id
-              }}</a>
+              {{ delivery._id }}
             </p>
           }
         </div>

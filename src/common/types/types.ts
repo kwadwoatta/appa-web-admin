@@ -1,4 +1,5 @@
 import { HttpContext, HttpHeaders, HttpParams } from '@angular/common/http';
+
 export type Options = {
   headers?:
     | HttpHeaders
@@ -88,6 +89,6 @@ export interface Package {
 }
 
 export interface Point {
-  type: string;
+  type: 'Point';
   coordinates: number[];
 }
