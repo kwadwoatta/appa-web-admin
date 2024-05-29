@@ -9,12 +9,13 @@ export class PackageService {
   http = inject(HttpClient);
 
   packageById = (packageId: number) =>
-    this.http.get<Package>(`/package/${packageId}`);
+    this.http.get<Package>(`http://localhost:3000/api/package/${packageId}`);
 
-  allDeliveries = () => this.http.get<Array<Package>>('/package');
+  allPackages = () =>
+    this.http.get<Array<Package>>('http://localhost:3000/api/package');
 
   createPackage = (dto: CreatePackageDto) =>
-    this.http.post<Package>(`/package`, dto);
+    this.http.post<Package>(`http://localhost:3000/api/package`, dto);
 }
 
 export interface CreatePackageDto extends Package {}

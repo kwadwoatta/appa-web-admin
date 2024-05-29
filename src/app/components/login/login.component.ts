@@ -22,22 +22,6 @@ export class LoginComponent {
   authService = inject(AuthService);
   cookieService = inject(CookieService);
 
-  // @Output() setPostId = new EventEmitter<number>();
-
-  // authQuery = injectQuery(() => ({
-  //   enabled: true,
-  //   queryKey: ['auth'],
-  //   queryFn: async (context) => {
-  //     // Cancels the request when component is destroyed before the request finishes
-  //     const abort$ = fromEvent(context.signal, 'abort');
-  //     return lastValueFrom(
-  //       this.#authService
-  //         .login$('admin@gmail.com', 'password')
-  //         .pipe(takeUntil(abort$))
-  //     );
-  //   },
-  // }));
-
   loginMutation = injectMutation(() => ({
     mutationFn: () =>
       lastValueFrom(
@@ -47,7 +31,7 @@ export class LoginComponent {
         })
       ).then((response) => {
         const expiresIn = new Date();
-        expiresIn.setHours(expiresIn.getHours() + 1); // Set cookie to expire in 1 hour
+        expiresIn.setHours(expiresIn.getHours() + 24);
         this.cookieService.set(
           'access_token',
           response.access_token,

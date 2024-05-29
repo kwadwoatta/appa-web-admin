@@ -4,18 +4,16 @@ import { provideRouter } from '@angular/router';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import {
   QueryClient,
-  QueryFunction,
   provideAngularQuery,
 } from '@tanstack/angular-query-experimental';
-import axios from 'axios';
 import { routes } from './app.routes';
 import { authInterceptor } from './interceptors/auth.interceptor';
 
 // Define a default query function that will receive the query key
-const defaultQueryFn: QueryFunction = async ({ queryKey }) => {
-  const { data } = await axios.get(`http://localhost:3000/api${queryKey[0]}`);
-  return data;
-};
+// const defaultQueryFn: QueryFunction = async ({ queryKey }) => {
+//   const { data } = await axios.get(`http://localhost:3000/api/${queryKey[0]}`);
+//   return data;
+// };
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -27,7 +25,7 @@ export const appConfig: ApplicationConfig = {
         defaultOptions: {
           queries: {
             gcTime: 1000 * 60 * 60 * 24, // 24 hours
-            queryFn: defaultQueryFn,
+            // queryFn: defaultQueryFn,
           },
         },
       })

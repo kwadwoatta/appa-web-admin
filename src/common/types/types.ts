@@ -1,5 +1,4 @@
 import { HttpContext, HttpHeaders, HttpParams } from '@angular/common/http';
-
 export type Options = {
   headers?:
     | HttpHeaders
@@ -70,37 +69,21 @@ export enum Role {
 
 export interface Package {
   _id: string;
-
   createdAt: Date;
-
   updatedAt: Date;
-
   active_delivery_id?: string;
-
   active_delivery?: Delivery;
-
   description: string;
-
   weight: number;
-
   width: number;
-
   height: number;
-
   depth: number;
-
   from_address: string;
-
   from_location: Point;
-
   to_address: string;
-
   to_location: Point;
-
   deliveries: Delivery[];
-
   from_user: User;
-
   to_user: User;
 }
 

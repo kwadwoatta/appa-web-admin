@@ -7,7 +7,8 @@ import { Injectable, inject } from '@angular/core';
 export class AuthService {
   http = inject(HttpClient);
 
-  login = (dto: AuthDto) => this.http.post<Auth>(`/auth/login`, dto);
+  login = (dto: AuthDto) =>
+    this.http.post<Auth>(`http://localhost:3000/api/auth/login`, dto);
 }
 
 export interface AuthDto {

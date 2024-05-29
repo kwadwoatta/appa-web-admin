@@ -1,1 +1,43 @@
-<p>dashboard works!</p>
+<div class="flex flex-col w-screen h-full p-5 !gap-5">
+  <div>
+    <div class="flex w-full justify-between font-bold">
+      <h1>Package List</h1>
+      <a class="text-green-700" href="/dashboard/package">Create Package</a>
+    </div>
+
+    @switch (packageQuery.status()) { @case ('pending') { Loading... } @case
+    ('error') { Error: {{ packageQuery.error()?.message }}
+    } @default {
+    <div class="text-green-900">
+      @for (package of packageQuery.data(); track package._id) {
+      <p>
+        <a href="/dashboard/package/{{ package._id }}">{{
+          package.description
+        }}</a>
+      </p>
+      }
+    </div>
+    } }
+    <div>@if (packageQuery.isFetching()) { Background Updating... }</div>
+  </div>
+
+  <div>
+    <div class="flex w-full justify-between font-bold">
+      <h1>Delivery List</h1>
+      <a class="text-blue-700" href="/dashboard/package">Create Delivery</a>
+    </div>
+
+    @switch (deliveryQuery.status()) { @case ('pending') { Loading... } @case
+    ('error') { Error: {{ deliveryQuery.error()?.message }}
+    } @default {
+    <div class="text-blue-900">
+      @for (delivery of deliveryQuery.data(); track delivery._id) {
+      <p>
+        <a href="/dashboard/delivery/{{ delivery._id }}">{{ delivery._id }}</a>
+      </p>
+      }
+    </div>
+    }}
+    <div>@if (deliveryQuery.isFetching()) { Background Updating... }</div>
+  </div>
+</div>
