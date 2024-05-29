@@ -28,7 +28,7 @@ export class LoginComponent {
         this.authService.login({
           email: 'admin@gmail.com',
           password: 'password',
-        })
+        }),
       ).then((response) => {
         const expiresIn = new Date();
         expiresIn.setHours(expiresIn.getHours() + 24);
@@ -39,7 +39,7 @@ export class LoginComponent {
           '/',
           '',
           true,
-          'Strict'
+          'Strict',
         );
 
         this.router.navigate(['/dashboard']);

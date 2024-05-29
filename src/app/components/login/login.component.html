@@ -1,10 +1,10 @@
 <div class="flex flex-col justify-center items-center w-full h-screen flex-1">
   @if (loginMutation.isPending()) {
-  <span>Logging you in as admin...</span>
+    <span>Logging you in as admin...</span>
   } @else if (loginMutation.isError()) {
-  <div>An error occurred: {{ loginMutation.error().message }}</div>
+    <div>An error occurred: {{ loginMutation.error().message }}</div>
   } @else if (loginMutation.isSuccess()) {
-  <div>{{ "Logged in as admin@gmail.com!" }}</div>
+    <div>{{ "Logged in as admin@gmail.com!" }}</div>
   }
   <button (click)="loginMutation.mutate()" class="font-bold hover:underline">
     Login As Admin

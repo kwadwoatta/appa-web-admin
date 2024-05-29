@@ -1,0 +1,92 @@
+<form
+  [formGroup]="formGroup!"
+  (ngSubmit)="onSubmit()"
+  class="h-full w-full p-10 flex flex-col justify-center items-center p-fluid [&>*]:w-full gap-5">
+  <div class="flex flex-column gap-2">
+    <label for="description">description</label>
+    <input
+      pInputText
+      id="description"
+      formControlName="description" />
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="weight">weight</label>
+    <input
+      pInputText
+      id="weight"
+      formControlName="weight" />
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="width">width</label>
+    <input pInputText id="width" formControlName="width" />
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="height">height</label>
+    <input
+      pInputText
+      id="height"
+      formControlName="height" />
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="depth">depth</label>
+    <input pInputText id="depth" formControlName="depth" />
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="from_address">from_address</label>
+    <input
+      pInputText
+      id="from_address"
+      formControlName="from_address" />
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="from_location">from_location</label>
+    <input
+      pInputText
+      id="from_location"
+      formControlName="from_location" />
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="to_address">to_address</label>
+    <input
+      pInputText
+      id="to_address"
+      formControlName="to_address" />
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="to_location">to_location</label>
+    <input
+      pInputText
+      id="to_location"
+      formControlName="to_location" />
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="from_user">from_user</label>
+    <input
+      pInputText
+      id="from_user"
+      formControlName="from_user" />
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="to_user">to_user</label>
+    <input
+      pInputText
+      id="to_user"
+      formControlName="to_user" />
+  </div>
+
+  <p-button
+    label="Submit"
+    size="small"
+    outlined="true"
+    styleClass="text-pink-500" />
+</form>

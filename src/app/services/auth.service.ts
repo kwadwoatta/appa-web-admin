@@ -12,11 +12,18 @@ export class AuthService {
   login = (dto: AuthDto) =>
     this.http.post<Auth>(`http://localhost:3000/api/auth/login`, dto);
 
-  constructor(private cookieService: CookieService, private router: Router) {}
+  constructor(
+    private cookieService: CookieService,
+    private router: Router,
+  ) {}
 
   checkAccessToken() {
     const token = this.cookieService.get('access_token');
-    if (token) {
+    if (
+      token &&
+      (window.location.pathname === '/' ||
+        window.location.pathname === '/login')
+    ) {
       this.router.navigate(['/dashboard']);
     }
   }
