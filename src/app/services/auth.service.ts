@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +11,15 @@ export class AuthService {
 
   login = (dto: AuthDto) =>
     this.http.post<Auth>(`http://localhost:3000/api/auth/login`, dto);
+
+  constructor(private cookieService: CookieService, private router: Router) {}
+
+  checkAccessToken() {
+    const token = this.cookieService.get('access_token');
+    if (token) {
+      this.router.navigate(['/dashboard']);
+    }
+  }
 }
 
 export interface AuthDto {
