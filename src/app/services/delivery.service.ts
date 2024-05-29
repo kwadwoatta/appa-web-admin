@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Delivery } from 'src/common';
 
 @Injectable({
@@ -18,4 +18,11 @@ export class DeliveryService {
     this.http.post<Delivery>(`http://localhost:3000/api/delivery`, dto);
 }
 
-export interface CreateDeliveryDto extends Delivery {}
+export type CreateDeliveryDto = Omit<
+  Delivery,
+  '_id' | 'createdAt' | 'updatedAt' | 'package' | 'customer' | 'driver'
+> & {
+  package: string;
+  customer: string;
+  driver: string;
+};

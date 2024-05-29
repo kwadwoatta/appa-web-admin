@@ -1,1 +1,61 @@
-<p>delivery works!</p>
+<form
+  (submit)="handleSubmit($event)"
+  class="card p-fluid p-10 flex flex-col justify-center items-center p-fluid [&>*]:w-full [&>label]:block [&>label]:font-bold [&>label]:mb-2 gap-2"
+>
+  <div class="flex-auto">
+    <ng-container [tanstackField]="form" name="package" #package="field">
+      <label class="block font-bold mb-2" [for]="package.api.name"
+        >package</label
+      >
+      <p-dropdown
+        *ngIf="getPackages() | async as packages"
+        [options]="packages"
+        [loading]="packageQuery.isLoading()"
+        optionLabel="description"
+        optionValue="_id"
+        placeholder="Select a package"
+        (onChange)="package.api.handleChange($any($event).value)"
+      />
+    </ng-container>
+  </div>
+
+  <div class="flex-auto">
+    <ng-container [tanstackField]="form" name="customer" #customer="field">
+      <label class="block font-bold mb-2" [for]="customer.api.name"
+        >customer</label
+      >
+      <p-dropdown
+        *ngIf="getUsers() | async as users"
+        [options]="users"
+        [loading]="userQuery.isLoading()"
+        optionLabel="email"
+        optionValue="_id"
+        placeholder="Select a customer"
+        (onChange)="customer.api.handleChange($any($event).value)"
+      />
+    </ng-container>
+  </div>
+
+  <div class="flex-auto">
+    <ng-container [tanstackField]="form" name="driver" #driver="field">
+      <label class="block font-bold mb-2" [for]="driver.api.name">driver</label>
+      <p-dropdown
+        *ngIf="getUsers() | async as users"
+        [options]="users"
+        [loading]="userQuery.isLoading()"
+        dataKey="_id"
+        optionLabel="email"
+        optionValue="_id"
+        placeholder="Select a driver"
+        (onChange)="driver.api.handleChange($any($event).value)"
+      />
+    </ng-container>
+  </div>
+
+  <p-button
+    label="Submit"
+    styleClass="mt-2"
+    type="submit"
+    [loading]="isSubmitting()"
+  />
+</form>

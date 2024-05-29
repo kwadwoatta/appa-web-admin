@@ -29,6 +29,7 @@ export type Options = {
 
 export interface Delivery {
   _id: string;
+  description: string;
   createdAt: Date;
   updatedAt: Date;
   pickup_time?: Date;

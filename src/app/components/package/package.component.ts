@@ -47,7 +47,7 @@ export class PackageComponent {
   userService = inject(UserService);
   userQuery = injectQuery(() => ({
     enabled: true,
-    queryKey: ['package'],
+    queryKey: ['user'],
     queryFn: async context => {
       const abort = fromEvent(context.signal, 'abort');
       return lastValueFrom(this.userService.allUsers().pipe(takeUntil(abort)));

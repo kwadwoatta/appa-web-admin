@@ -55,7 +55,7 @@
         <div class="text-blue-900">
           @for (delivery of deliveryQuery.data(); track delivery._id) {
             <p>
-              {{ delivery._id }}
+              {{ delivery.description }}
             </p>
           }
         </div>
