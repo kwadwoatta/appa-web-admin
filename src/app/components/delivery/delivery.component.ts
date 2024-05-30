@@ -101,19 +101,15 @@ export class DeliveryComponent {
         driver: value.driver,
       };
 
-      console.log({ dto });
-
       this.deliveryMutation.mutate(dto, {
         onSuccess: () => {
           this.router.navigate(['/dashboard']);
         },
         onError: e => {
-          console.log({ e });
           alert(JSON.stringify((e as any).error.message));
         },
       });
     },
-    // Add a validator to support Zod usage in Form and Field
     validatorAdapter: zodValidator,
   });
 

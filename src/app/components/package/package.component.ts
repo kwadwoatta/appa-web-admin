@@ -60,50 +60,6 @@ export class PackageComponent {
     return of(this.userQuery.data() ?? []);
   }
 
-  // uuidValidator(control: FormControl): { [key: string]: any } | null {
-  //   const value = control.value;
-  //   const uuidRegex =
-  //     /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-
-  //   if (!uuidRegex.test(value)) {
-  //     return { invalidUuid: true };
-  //   }
-
-  //   return null;
-  // }
-
-  // geoJsonPointValidator(control: FormControl): { [key: string]: any } | null {
-  //   const value = control.value;
-  //   const valueArray = value.split(',');
-  //   console.log({ value });
-
-  //   if (!Array.isArray(valueArray) || valueArray.length !== 2) {
-  //     return { invalidGeoJsonPoint: true };
-  //   }
-
-  //   const [longitude, latitude] = valueArray.map(parseFloat);
-
-  //   if (typeof longitude !== 'number' || longitude < -180 || longitude > 180) {
-  //     return { invalidGeoJsonPoint: true };
-  //   }
-
-  //   if (typeof latitude !== 'number' || latitude < -90 || latitude > 90) {
-  //     return { invalidGeoJsonPoint: true };
-  //   }
-
-  //   return null;
-  // }
-
-  // firstNameAsyncValidator = z.string().refine(
-  //   async value => {
-  //     await new Promise(resolve => setTimeout(resolve, 1000));
-  //     return !value.includes('error');
-  //   },
-  //   {
-  //     message: "No 'error' allowed in first name",
-  //   }
-  // );
-
   form = injectForm({
     defaultValues: {
       weight: '',
@@ -154,19 +110,15 @@ export class PackageComponent {
         to_user: value.to_user,
       };
 
-      console.log({ dto });
-
       this.packageMutation.mutate(dto, {
         onSuccess: () => {
           this.router.navigate(['/dashboard']);
         },
         onError: e => {
-          console.log({ e });
           alert(JSON.stringify((e as any).error.message));
         },
       });
     },
-    // Add a validator to support Zod usage in Form and Field
     validatorAdapter: zodValidator,
   });
 

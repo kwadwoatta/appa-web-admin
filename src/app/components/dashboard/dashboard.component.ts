@@ -2,8 +2,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  Output,
   inject,
+  Output,
 } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import {
@@ -34,11 +34,10 @@ export class DashboardComponent {
   packageQuery = injectQuery(() => ({
     enabled: true,
     queryKey: ['package'],
-    queryFn: async (context) => {
-      // Cancels the request when component is destroyed before the request finishes
+    queryFn: async context => {
       const abort = fromEvent(context.signal, 'abort');
       return lastValueFrom(
-        this.packageService.allPackages().pipe(takeUntil(abort)),
+        this.packageService.allPackages().pipe(takeUntil(abort))
       );
     },
   }));
@@ -46,11 +45,10 @@ export class DashboardComponent {
   deliveryQuery = injectQuery(() => ({
     enabled: true,
     queryKey: ['delivery'],
-    queryFn: async (context) => {
-      // Cancels the request when component is destroyed before the request finishes
+    queryFn: async context => {
       const abort = fromEvent(context.signal, 'abort');
       return lastValueFrom(
-        this.deliveryService.allDeliveries().pipe(takeUntil(abort)),
+        this.deliveryService.allDeliveries().pipe(takeUntil(abort))
       );
     },
   }));

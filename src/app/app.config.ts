@@ -41,21 +41,5 @@ export const appConfig: ApplicationConfig = {
     ),
     importProvidersFrom(CookieService),
     provideAnimationsAsync(),
-    // {
-    //   provide: APP_INITIALIZER,
-    //   useFactory: initializeApp,
-    //   deps: [AuthService],
-    //   multi: true,
-    // },
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: AuthInterceptor,
-    //   multi: true,
-    // },
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: HttpResponseInterceptor,
-    //   multi: true,
-    // },
   ],
 };
